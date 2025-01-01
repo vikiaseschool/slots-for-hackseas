@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request, session
-import random
+from flask import Flask, render_template, request, session, jsonify
 from functions import check_winnings, get_winnings_value, get_win_song, get_slot
 app = Flask(__name__)
-app.secret_key = 'ahoj'
+app.secret_key = '##########'
 
 @app.route('/')
 def index():
@@ -39,6 +38,19 @@ def spin():
 
     return render_template('index.html', credit=credit, bet=bet, slot_symbols=slot_symbols, winnings=winnings, winnings_value=winnings_value, win_song=win_song)
 
+@app.route('/change_bet', methods=['POST'])
+def change_bet():
+    bet_action = request.form.get('bet_action')
+    bet = session.get('bet', 2.0)
+
+    if bet_action == 'plus' and bet < 5.0:
+        bet += 0.25
+    elif bet_action == 'minus' and bet > 0.25:
+        bet -= 0.25
+
+    session['bet'] = bet
+
+    return jsonify({'bet': bet})
 
 if __name__ == '__main__':
     app.run(debug=True)
