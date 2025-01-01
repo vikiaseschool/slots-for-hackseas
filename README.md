@@ -21,9 +21,14 @@ Freaky Slots is a slot machine game developed using Python and Pygame. The game 
 
 ## V2 Update
 - completely remade the project into web app using flask.
-- removed freakbob jackpot for a while.
 - the winnings are easy to get.
+-deleted intro music from web version.
 
+## Repo Orientation
+- main.py = pygame version
+- functions.py = functions for calculations etc.
+- app.py = flask app
+- *.jpg and *.mp3 files for symbols and music
 ## Credits
 
 This project was developed by vikiaseschool. A lot of effort was put into the development, including the creation of custom graphics and sound design to enhance the gaming experience.
