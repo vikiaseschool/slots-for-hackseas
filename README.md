@@ -9,6 +9,7 @@ Freaky Slots is a slot machine game developed using Python and Pygame. The game 
 - **Slot Machine Mechanics**: Randomized slot symbols with varying probabilities.
 - **Winning Combinations**: Detection of winning rows, columns, and diagonals.
 - **Betting System**: Adjustable betting amounts and credit management.
+- **All together**: All of you guys are playing together on one account, so don't blow it ;)
 
 ## How to Play
 
