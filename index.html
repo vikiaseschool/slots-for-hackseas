@@ -56,6 +56,7 @@
             display: inline-block;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>Freaky Slots</h1>
@@ -84,9 +85,9 @@
         </form>
 
         <div>
-            <button form="spin-form" name="bet_action" value="minus">-</button>
-            <span>Bet: {{ bet }} $</span>
-            <button form="spin-form" name="bet_action" value="plus">+</button>
+            <button id="minus-bet" name="bet_action" value="minus">-</button>
+            <span>Bet: <span id="bet-value">{{ bet }}</span> $</span>
+            <button id="plus-bet" name="bet_action" value="plus">+</button>
         </div>
 
         <div>
@@ -95,6 +96,31 @@
     </div>
 
     <script>
+        $(document).ready(function() {
+            $('#minus-bet').click(function(e) {
+                e.preventDefault();
+                changeBet('minus');
+            });
+
+            $('#plus-bet').click(function(e) {
+                e.preventDefault();
+                changeBet('plus');
+            });
+
+            function changeBet(action) {
+                $.ajax({
+                    url: '/change_bet',
+                    method: 'POST',
+                    data: {
+                        'bet_action': action
+                    },
+                    success: function(response) {
+                        $('#bet-value').text(response.bet);
+                    }
+                });
+            }
+        });
+
         {% if win_song %}
             var audio = new Audio("{{ url_for('static', filename=win_song) }}");
             audio.play();
